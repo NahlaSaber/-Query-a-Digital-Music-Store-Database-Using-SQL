@@ -1,0 +1,45 @@
+(query related to the first part of question 3 in set 2)
+select artist.Name, sum(InvoiceLine.UnitPrice*InvoiceLine.Quantity ) as invoice_total_amount
+FROM Artist
+JOIN Album
+on Artist.ArtistId= Album.ArtistId
+JOIN Track
+on album.AlbumId= Track.AlbumId
+JOIN InvoiceLine
+on InvoiceLine.TrackId= Track.TrackId
+GROUP by 1
+order by 2 DESC
+limit 10;
+
+(query related to question 3 in set 1)
+select customer.CustomerId,sum(invoice.total)
+from Invoice
+join Customer
+on invoice.CustomerId= customer.CustomerId
+GROUP BY 1
+order by 2 DESC
+LIMIT 10 ;
+
+(query related to question "what is the Top albums based on number of tracks sold")
+select Album.Title,count(track.TrackId) as number_of_tracks_sold
+FROM Album
+JOIN Track
+on album.AlbumId= Track.AlbumId
+GROUP by 1
+order by 2 DESC
+limit 10;
+
+
+(query related to question 2 in set 2)
+select artist.Name, count(genre.Name)
+from Genre
+join Track
+on Genre.GenreId=track.GenreId
+join Album
+on Track.AlbumId= Album.AlbumId
+JOIN Artist
+on Artist.ArtistId= Album.ArtistId
+WHERE genre.Name = "Rock"
+GROUP by 1
+ORDER by 2 DESC
+LIMIT 10;
